@@ -35,7 +35,7 @@
                 FilteredList's addToPlannedActivities function
 
 
-How the user triggers state changes:
+## How the user triggers state changes:
     Most all of the state changes revolve around the planned_activities state. This state keeps track of the activities
     that were added, and how many times each were added (so takes the form of a 2d array where each row contains the
     activity and the number of times it was added.
