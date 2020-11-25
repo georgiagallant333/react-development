@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+#README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Components and How They Interact:
+    ###The components I use are: App, FilteredList, DisplayList, Activity, and AggregateDisplay.
 
-## Available Scripts
+    * App: deals with larger app design (header, and placement of filtered list), and holds the
+     list of items which it passes to the FilteredList component
+         * FilteredList: displays the list of items, as well as allows for sorting,
+            and filtering. It also deals with the aggregating of the total amount of
+            time it takes to do all the activities added to the schedule. It does this
+            by calling DisplayList as well as AggregateDisplay
+                 * DisplayList handles the displaying of each activity. It calls upon the
+                Activity component to do so
+                    *Activity: deals with displaying each activity, as well as handling the click of the
+                    Add button on each activity
+                * AggregateDisplay: handles displaying of all the aggregate informaiton which includes
+                the list of selected activities, as well as the aggregate amount of time it would take
+                to complete all the selected activities
 
-In the project directory, you can run:
 
-### `npm start`
+ ##How data is passed:
+     * App --> FilteredList:
+                - passes the constant list of all activities
+     * FilteredList --> DisplayList:
+                - passes a paired down version of the activity list (one that is sorted and filtered)
+                - a callback to the FilteredList function called addToPlannedActivities which, given an activity, adds
+                that activity to the list of planned activities
+     * FilteredList --> AggregateDisplay:
+                - a list of all the activities that were selected (the "planned activities")
+                - two callbacks to the FilteredList functions addToPlannedActivities and removeFromPlannedActivities which,
+                 given an activity, add and remove from the list of planned activities
+     * DisplayList --> Activity:
+                - an activity from the list of paired down activities given from from the FilteredList
+                - a callback to a DisplayList called callFilteredListAddToPlannedActivities which simply calls
+                FilteredList's addToPlannedActivities function
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+How the user triggers state changes:
+    Most all of the state changes revolve around the planned_activities state. This state keeps track of the activities
+    that were added, and how many times each were added (so takes the form of a 2d array where each row contains the
+    activity and the number of times it was added.
 
-### `npm test`
+    To change this state, the user can either press the add button on the given activity, or press the + and - buttons
+    in the aggregate display. If the add button is pressed, this is picked up in the Activity component, which then
+    calls DisplayList's callFilteredListAddToPlannedActivities function which, as its name suggests, calls FilteredList's
+    addToPlannedActivities function, which either adds the activity to the list of planned_activites, and sets the number of times
+    it was added to 1, or it finds the location of that activity in the planned_activites list, and increments the value representing
+    the number of times it was added. If the + or - buttons are clicked, then the AggregateDisplay component is triggered, which
+    calls FilteredList's addToPlannedActivities function directly which performs the exact same functionality.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    The other states I keep track of are the states of the dropdowns. These determine what filters and sorts are being used.
+    The user triggers these by clicking the dropdown, which then triggers the corresponding change state function, which
+    changes the state corresponding to that dropdown to the selected menu item.
