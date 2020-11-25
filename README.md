@@ -1,7 +1,7 @@
-#README
+# README
 
-##Components and How They Interact:
-    ###The components I use are: App, FilteredList, DisplayList, Activity, and AggregateDisplay.
+## Components and How They Interact:
+    ### The components I use are: App, FilteredList, DisplayList, Activity, and AggregateDisplay.
 
     * App: deals with larger app design (header, and placement of filtered list), and holds the
      list of items which it passes to the FilteredList component
@@ -18,7 +18,7 @@
                 to complete all the selected activities
 
 
- ##How data is passed:
+ ## How data is passed:
      * App --> FilteredList:
                 - passes the constant list of all activities
      * FilteredList --> DisplayList:
