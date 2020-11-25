@@ -1,0 +1,72 @@
+/*for each image, set a height*/
+.img-wrapper {
+    height: 25vh;
+}
+
+/*for +/- buttons in the aggregate display*/
+.adjust-duration-button {
+    margin: 1vw;
+}
+
+/*for each dropdown*/
+.dropdown {
+    margin: 1vw;
+    margin-left: 4vw;
+}
+/*for the short text explaining each filter dropdwon*/
+.filter-header {
+    margin-left: 3vw;
+}
+
+/*container for all filter and sort dropdowns*/
+.dropdown-container {
+    border: solid black;
+    border-width: thin;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding: 1vw;
+}
+
+/*container for the aggregate display (with the schedule)*/
+.schedule-container {
+    border: solid black;
+    border-width: thin;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    margin-left: 2vw;
+    min-width: 20vw;
+    padding: 1vw;
+}
+
+/*header for aggregate display*/
+.schedule-header {
+    margin-bottom: 4vh;
+}
+
+/*for body of the app/main page*/
+.main-page-body {
+    padding: 5vw;
+}
+
+/*for the left portion of the dropdown container that only contains filters*/
+.filter-box {
+    border-right: solid thin black;
+    padding-right: 3vw;
+}
+
+/*for the right portion of the dropdown container that only contains the sort dropdown*/
+.sort-box {
+    padding-left: 3vw;
+    padding-right: 2vw;
+}
+
+/*for each activity*/
+.activity-item {
+    border-top: solid grey thin;
+}
+
+/*for the text displaying the total duration in the aggregate display*/
+.total-duration {
+    border-top: solid black thin;
+    padding-top: 2vh;
+}
